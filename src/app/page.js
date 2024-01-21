@@ -24,10 +24,18 @@ writeFile(
 */
 
 function Home() {
+  const dbRaw = readFile(DATABASE_PATH);
+  const dbJSON = JSON.parse(dbRaw);
+  const visitor = dbJSON.hits + 1;
+  writeFile(
+    DATABASE_PATH,
+    JSON.stringify({ hits: visitor }),
+  )
+
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number X.</p>
+      <p>You are visitor number {visitor}.</p>
     </main>
   );
 }
